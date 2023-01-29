@@ -1,8 +1,8 @@
 {
-  "name": "dummy",
-  "displayName": "Dummy",
+  "name": "Rabbithole",
+  "displayName": "Rabbithole",
   "version": "0.0.1",
-  "description": "A basic Plasmo extension.",
+  "description": "GPT-3 powered rabbithole dodger",
   "author": "ibbi",
   "scripts": {
     "dev": "plasmo dev",
