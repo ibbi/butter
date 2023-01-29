@@ -18,9 +18,9 @@ export const getStyle = () => {
 	return style;
 };
 
-export const getShadowHostId = () => "plasmo-google-sidebar";
+export const getShadowHostId = () => "sidebar";
 
-const GoogleSidebar = () => {
+const Sidebar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	document.addEventListener("mouseup", (e) => {
 		if (e.ctrlKey && getSelectedText().length > 0) {
@@ -30,7 +30,7 @@ const GoogleSidebar = () => {
 	const getSelectedText = () => window.getSelection().toString();
 
 	useEffect(() => {
-		document.body.classList.toggle("plasmo-google-sidebar-show", isOpen);
+		document.body.classList.toggle("sidebar-show", isOpen);
 	}, [isOpen]);
 
 	return (
@@ -46,4 +46,4 @@ const GoogleSidebar = () => {
 	);
 };
 
-export default GoogleSidebar;
+export default Sidebar;
