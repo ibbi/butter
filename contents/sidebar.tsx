@@ -41,7 +41,6 @@ const Sidebar = () => {
 	const [questionAnswers, setQuestionAnswers] = useState<
 		Array<{ q: string; a: string }>
 	>([]);
-	console.log(questionAnswers);
 
 	const getSelectedText = () => window.getSelection().toString();
 
