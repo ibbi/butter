@@ -4,6 +4,7 @@
 	background-color: #1b141d;
 	width: var(--sidebar-width);
 	height: 100vh;
+	overflow-y: scroll;
 
 	display: flex;
 	align-items: center;
