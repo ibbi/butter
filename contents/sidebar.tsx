@@ -1,7 +1,8 @@
-import iconBase64 from "data-base64:~assets/icon.png";
 import cssText from "data-text:~/contents/sidebar.css";
 import type { PlasmoCSConfig } from "plasmo";
 import { useEffect, useState } from "react";
+
+import ResponseBlock from "~components/response-block";
 
 // Inject to the webpage itself
 import "./sidebar-base.css";
@@ -22,8 +23,19 @@ export const getShadowHostId = () => "sidebar";
 
 const Sidebar = () => {
 	const [isOpen, setIsOpen] = useState(false);
+	const [questionAnswers, setQuestionAnswers] = useState<
+		Array<{ q: string; a: string }>
+	>([]);
+	console.log(questionAnswers);
 	document.addEventListener("mouseup", (e) => {
-		if (e.ctrlKey && getSelectedText().length > 0) {
+		if (e.shiftKey && getSelectedText().length > 0) {
+			setQuestionAnswers((p) => [
+				...p,
+				{
+					q: getSelectedText(),
+					a: "Answer",
+				},
+			]);
 			setIsOpen(true);
 		}
 	});
@@ -40,8 +52,9 @@ const Sidebar = () => {
 					🟡 Close
 				</button>
 			)}
-			<img src={iconBase64} alt="Extension Icon" width={128} height={128} />
-			<p>{getSelectedText()}</p>
+			{questionAnswers.map((qa) => {
+				return <ResponseBlock qa={qa} key={qa.q} />;
+			})}
 		</div>
 	);
 };
