@@ -22,23 +22,27 @@ export const getStyle = () => {
 export const getShadowHostId = () => "sidebar";
 
 const Sidebar = () => {
+	useEffect(() => {
+		document.addEventListener("mouseup", (e) => {
+			if (e.shiftKey && getSelectedText().length > 0) {
+				setQuestionAnswers((p) => [
+					...p,
+					{
+						q: getSelectedText(),
+						a: "Answer",
+					},
+				]);
+				setIsOpen(true);
+			}
+		});
+	}, []);
+
 	const [isOpen, setIsOpen] = useState(false);
 	const [questionAnswers, setQuestionAnswers] = useState<
 		Array<{ q: string; a: string }>
 	>([]);
 	console.log(questionAnswers);
-	document.addEventListener("mouseup", (e) => {
-		if (e.shiftKey && getSelectedText().length > 0) {
-			setQuestionAnswers((p) => [
-				...p,
-				{
-					q: getSelectedText(),
-					a: "Answer",
-				},
-			]);
-			setIsOpen(true);
-		}
-	});
+
 	const getSelectedText = () => window.getSelection().toString();
 
 	useEffect(() => {
