@@ -2,6 +2,7 @@ import cssText from "data-text:~/contents/sidebar.css";
 import type { PlasmoCSConfig } from "plasmo";
 import { useEffect, useState } from "react";
 
+import completion from "~api";
 import ResponseBlock from "~components/response-block";
 
 // Inject to the webpage itself
@@ -24,15 +25,19 @@ export const getShadowHostId = () => "sidebar";
 const Sidebar = () => {
 	useEffect(() => {
 		document.addEventListener("mouseup", (e) => {
-			if (e.shiftKey && getSelectedText().length > 0) {
+			const currPrompt = getSelectedText();
+			if (e.shiftKey && currPrompt.length > 0) {
 				setQuestionAnswers((p) => [
 					...p,
 					{
-						q: getSelectedText(),
-						a: "Answer",
+						q: currPrompt,
+						a: "Loading...",
 					},
 				]);
 				setIsOpen(true);
+				completion(currPrompt).then((a) => {
+					console.log(a);
+				});
 			}
 		});
 	}, []);
