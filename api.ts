@@ -8,7 +8,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export default async (question) => {
-	let prompt = `Elaborate further on ${question}.`;
+	let prompt = `Elaborate further on ${question} in a couple of sentences.`;
 	const res = await openai.createCompletion({
 		model: "text-davinci-003",
 		prompt,

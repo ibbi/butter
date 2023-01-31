@@ -8,7 +8,7 @@ const ResponseBlock = ({ qa }: { qa: { q: string; a: string } }) => {
 					fontWeight: "bold",
 					padding: "0.5rem",
 				}}>
-				{qa.q}
+				🤔{qa.q}
 			</p>
 			<p style={{ color: "#f0eaea" }}>{qa.a}</p>
 		</>
