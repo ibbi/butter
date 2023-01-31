@@ -1,6 +1,6 @@
 import cssText from "data-text:~/contents/sidebar.css";
 import type { PlasmoCSConfig } from "plasmo";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import completion from "~api";
 import ResponseBlock from "~components/response-block";
@@ -35,8 +35,8 @@ const Sidebar = () => {
 					},
 				]);
 				setIsOpen(true);
-				completion(currPrompt).then((a) => {
-					console.log(a);
+				completion(currPrompt).then((r) => {
+					updateLoading(r.status === 200, r.data.choices[0].text);
 				});
 			}
 		});
@@ -46,8 +46,26 @@ const Sidebar = () => {
 	const [questionAnswers, setQuestionAnswers] = useState<
 		Array<{ q: string; a: string }>
 	>([]);
+	const bottomRef = useRef<HTMLDivElement>(null);
 
+	const scrollToBottom = () => {
+		bottomRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+	};
 	const getSelectedText = () => window.getSelection().toString();
+	const updateLoading = (success, a) => {
+		if (success) {
+			setQuestionAnswers((p) => {
+				const last = p[p.length - 1];
+				return [...p.slice(0, p.length - 1), { ...last, a }];
+			});
+		} else {
+			setQuestionAnswers((p) => {
+				const last = p[p.length - 1];
+				return [...p.slice(0, p.length - 1), { ...last, a: "Error" }];
+			});
+		}
+		scrollToBottom();
+	};
 
 	useEffect(() => {
 		document.body.classList.toggle("sidebar-show", isOpen);
@@ -63,6 +81,7 @@ const Sidebar = () => {
 			{questionAnswers.map((qa) => {
 				return <ResponseBlock qa={qa} key={qa.q} />;
 			})}
+			<div ref={bottomRef} />
 		</div>
 	);
 };
