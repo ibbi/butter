@@ -11,6 +11,7 @@ import "./sidebar-base.css";
 export const config: PlasmoCSConfig = {
 	matches: ["<all_urls>"],
 	all_frames: true,
+	css: ["font.css"],
 };
 
 // Inject into the ShadowDOM
@@ -73,11 +74,10 @@ const Sidebar = () => {
 
 	return (
 		<div id="sidebar" className={isOpen ? "open" : "closed"}>
-			{isOpen && (
-				<button className="sidebar-toggle" onClick={() => setIsOpen(false)}>
-					🟡 Close
-				</button>
-			)}
+			<div className="header-container" onClick={() => setIsOpen(false)}>
+				<p className="banner-text">click to close</p>
+			</div>
+
 			{questionAnswers.map((qa) => {
 				return <ResponseBlock qa={qa} key={qa.q} />;
 			})}

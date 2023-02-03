@@ -1,3 +1,13 @@
+:root {
+	--input-header: "#8DFAFE";
+	--input-text: "#EE766D";
+	--output-header: "#010000";
+	--output-text: "#8DF57A";
+	--banner-bg: "#C7C7C7";
+	--banner-text: "#000000";
+	--bg: "#8DFAFE";
+}
+
 #sidebar {
 	position: absolute;
 
@@ -27,12 +37,15 @@
 	padding: 0 24px;
 	text-align: center;
 	font-size: 14px;
-	font-family: sans-serif;
+	font-family: "jetbrains";
 	text-align: left;
 }
 
-.sidebar-toggle {
+.header-container {
 	position: fixed;
-	right: 4.7px;
-	bottom: 47px;
+	top: 0px;
+	width: 100%;
+	background-color: var(--banner-bg);
+	height: 50px;
+	cursor: pointer;
 }

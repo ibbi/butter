@@ -1,16 +1,14 @@
 const ResponseBlock = ({ qa }: { qa: { q: string; a: string } }) => {
 	return (
 		<>
-			<p
-				style={{
-					backgroundColor: "#cccccc",
-					color: "#323232",
-					fontWeight: "bold",
-					padding: "0.5rem",
-				}}>
-				🤔{qa.q}
+			<p className="input-text">
+				<span className="input-header">input: </span>
+				{qa.q}
 			</p>
-			<p style={{ color: "#f0eaea" }}>{qa.a}</p>
+			<p className="output-text">
+				<span className="output-header">output: </span>
+				{qa.a}
+			</p>
 		</>
 	);
 };
