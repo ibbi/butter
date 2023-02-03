@@ -8,7 +8,7 @@ const Footer = ({
 }: {
 	onClickRefresh: () => void;
 	onClickComplexity: () => void;
-	currComplexity: "Simple" | "Regular" | "Detailed";
+	currComplexity: string;
 }) => {
 	return (
 		<div id="footer">

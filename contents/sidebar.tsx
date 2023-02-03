@@ -26,28 +26,28 @@ export const getStyle = () => {
 
 export const getShadowHostId = () => "sidebar";
 
-const complexities = ["Simple", "Regular", "Detailed"] as const;
+const complexities = ["Simple", "Regular", "Detailed"];
 
 const Sidebar = () => {
 	const [isOpen, setIsOpen] = useState(true);
 	const [questionAnswers, setQuestionAnswers] = useState<
 		Array<{ q: string; a: string }>
 	>([]);
-	const [complexity, setComplexity] = useState<(typeof complexities)[number]>(
-		complexities[1],
-	);
+	const [complexityIdx, setComplexityIdx] = useState<number>(1);
 
 	const bottomRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		document.addEventListener("mouseup", (e) => {
+		const onMouseUp = (e) => {
 			const currPrompt = getSelectedText();
 			if (e.shiftKey && currPrompt.length > 0) {
-				askQuestion(currPrompt);
+				askQuestion(currPrompt, complexities[complexityIdx]);
 				setIsOpen(true);
 			}
-		});
-	}, []);
+		};
+		document.addEventListener("mouseup", onMouseUp);
+		return () => document.removeEventListener("mouseup", onMouseUp);
+	}, [complexityIdx]);
 
 	useEffect(() => {
 		document.body.classList.toggle("sidebar-show", isOpen);
@@ -57,7 +57,7 @@ const Sidebar = () => {
 		scrollToBottom();
 	}, [questionAnswers]);
 
-	const askQuestion = (q: string) => {
+	const askQuestion = (q: string, complexity) => {
 		setQuestionAnswers((p) => [
 			...p,
 			{
@@ -65,7 +65,7 @@ const Sidebar = () => {
 				a: "Loading...",
 			},
 		]);
-		completion(q).then((r) => {
+		completion(q, complexity).then((r) => {
 			updateLoading(r.status === 200, r.data.choices[0].text);
 		});
 	};
@@ -89,12 +89,11 @@ const Sidebar = () => {
 	};
 	const onClickRefresh = () => {
 		const lastQ = questionAnswers[questionAnswers.length - 1].q;
-		askQuestion(lastQ);
+		askQuestion(lastQ, complexities[complexityIdx]);
 	};
 	const onClickComplexity = () => {
-		const currIndex = complexities.indexOf(complexity);
-		const nextIndex = (currIndex + 1) % complexities.length;
-		setComplexity(complexities[nextIndex]);
+		setComplexityIdx((p) => (p + 1) % complexities.length);
+		console.log(complexityIdx);
 	};
 
 	return (
@@ -108,7 +107,7 @@ const Sidebar = () => {
 			<Footer
 				onClickRefresh={onClickRefresh}
 				onClickComplexity={onClickComplexity}
-				currComplexity={complexity}
+				currComplexity={complexities[complexityIdx]}
 			/>
 			<div id="scroll-wrapper">
 				{questionAnswers.map((qa) => {
