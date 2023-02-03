@@ -5,13 +5,15 @@ const VscButton = ({
 	alt,
 }: {
 	icon: string;
-	position: "top-right" | "bottom-right" | "top-left" | "bottom-left";
+	position: "top-right";
 	onClick: () => void;
 	alt: string;
 }) => {
 	return (
-		<button onClick={onClick} className={`vsc-button ${position}`}>
-			<img src={icon} alt={alt} />
+		<button onClick={onClick} className={`base-button vsc-button ${position}`}>
+			<div className="center-children">
+				<img src={icon} alt={alt} />
+			</div>
 		</button>
 	);
 };
