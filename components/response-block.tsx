@@ -3,10 +3,10 @@ const ResponseBlock = ({ qa }: { qa: { q: string; a: string } }) => {
 		<>
 			<p className="input-text">
 				<span className="input-header">input: </span>
-				{qa.q}
+				{`\"${qa.q}\"`}
 			</p>
 			<p className="output-text">
-				<span className="output-header">output: </span>
+				<span className="output-header">// </span>
 				{qa.a}
 			</p>
 		</>

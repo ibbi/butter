@@ -1,6 +1,15 @@
 :root,
 #sidebar:host {
 	--sidebar-width: 420px;
+
+	--input-header: #a9dbfa;
+	--input-text: #c5947c;
+	--output-header: #74975d;
+	--output-text: #74975d;
+	--banner-bg: #bc8abd;
+	--banner-text: #010000;
+	--button-hover: #313232;
+	--bg: #1e1e1e;
 }
 
 body.sidebar-show,

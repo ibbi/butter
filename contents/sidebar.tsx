@@ -3,10 +3,12 @@ import type { PlasmoCSConfig } from "plasmo";
 import { useEffect, useRef, useState } from "react";
 
 import completion from "~api";
+import close from "~assets/close.svg";
 import ResponseBlock from "~components/response-block";
+import VscButton from "~components/vsc-button";
 
 // Inject to the webpage itself
-import "./sidebar-base.css";
+import "./base.css";
 
 export const config: PlasmoCSConfig = {
 	matches: ["<all_urls>"],
@@ -71,13 +73,16 @@ const Sidebar = () => {
 	useEffect(() => {
 		document.body.classList.toggle("sidebar-show", isOpen);
 	}, [isOpen]);
+	// TODO: fix scroll to bottom
 
 	return (
 		<div id="sidebar" className={isOpen ? "open" : "closed"}>
-			<div className="header-container" onClick={() => setIsOpen(false)}>
-				<p className="banner-text">click to close</p>
-			</div>
-
+			<VscButton
+				onClick={() => setIsOpen(false)}
+				alt="close"
+				icon={close}
+				position="top-right"
+			/>
 			{questionAnswers.map((qa) => {
 				return <ResponseBlock qa={qa} key={qa.q} />;
 			})}
