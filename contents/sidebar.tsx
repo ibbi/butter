@@ -29,7 +29,7 @@ export const getShadowHostId = () => "sidebar";
 const complexities = ["Simple", "Regular", "Detailed"];
 
 const Sidebar = () => {
-	const [isOpen, setIsOpen] = useState(true);
+	const [isOpen, setIsOpen] = useState(false);
 	const [questionAnswers, setQuestionAnswers] = useState<
 		Array<{ q: string; a: string }>
 	>([]);
