@@ -93,7 +93,6 @@ const Sidebar = () => {
 	};
 	const onClickComplexity = () => {
 		setComplexityIdx((p) => (p + 1) % complexities.length);
-		console.log(complexityIdx);
 	};
 
 	return (
@@ -113,7 +112,7 @@ const Sidebar = () => {
 				{questionAnswers.map((qa) => {
 					return <ResponseBlock qa={qa} key={qa.q} />;
 				})}
-				<div ref={bottomRef} />
+				<div style={{ marginTop: "24px" }} ref={bottomRef} />
 			</div>
 		</div>
 	);

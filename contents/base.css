@@ -1,6 +1,7 @@
 :root,
 #sidebar:host {
 	--sidebar-width: 420px;
+	--footer-height: 28px;
 
 	--input-header: #a9dbfa;
 	--input-text: #c5947c;

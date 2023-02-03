@@ -22,13 +22,13 @@
 }
 
 #scroll-wrapper {
-	max-height: 90%;
+	max-height: calc(100vh - var(--footer-height));
 	overflow-y: scroll;
 	display: flex;
 	align-items: flex-start;
 	justify-content: flex-start;
 	flex-direction: column;
-	padding: 64px 0;
+	padding: 48px 0;
 }
 
 #sidebar p {
@@ -43,7 +43,7 @@
 	position: absolute;
 	bottom: 0;
 	width: var(--sidebar-width);
-	height: 28px;
+	height: var(--footer-height);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
