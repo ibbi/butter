@@ -26,6 +26,12 @@ export const getStyle = () => {
 export const getShadowHostId = () => "sidebar";
 
 const Sidebar = () => {
+	const [isOpen, setIsOpen] = useState(false);
+	const [questionAnswers, setQuestionAnswers] = useState<
+		Array<{ q: string; a: string }>
+	>([]);
+	const bottomRef = useRef<HTMLDivElement>(null);
+
 	useEffect(() => {
 		document.addEventListener("mouseup", (e) => {
 			const currPrompt = getSelectedText();
@@ -45,11 +51,14 @@ const Sidebar = () => {
 		});
 	}, []);
 
-	const [isOpen, setIsOpen] = useState(false);
-	const [questionAnswers, setQuestionAnswers] = useState<
-		Array<{ q: string; a: string }>
-	>([]);
-	const bottomRef = useRef<HTMLDivElement>(null);
+	useEffect(() => {
+		document.body.classList.toggle("sidebar-show", isOpen);
+	}, [isOpen]);
+
+	useEffect(() => {
+		console.log("scrolling");
+		scrollToBottom();
+	}, [questionAnswers]);
 
 	const scrollToBottom = () => {
 		bottomRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -67,13 +76,7 @@ const Sidebar = () => {
 				return [...p.slice(0, p.length - 1), { ...last, a: "Error" }];
 			});
 		}
-		scrollToBottom();
 	};
-
-	useEffect(() => {
-		document.body.classList.toggle("sidebar-show", isOpen);
-	}, [isOpen]);
-	// TODO: fix scroll to bottom
 
 	return (
 		<div id="sidebar" className={isOpen ? "open" : "closed"}>
@@ -87,8 +90,8 @@ const Sidebar = () => {
 				{questionAnswers.map((qa) => {
 					return <ResponseBlock qa={qa} key={qa.q} />;
 				})}
+				<div ref={bottomRef} />
 			</div>
-			<div ref={bottomRef} />
 		</div>
 	);
 };
