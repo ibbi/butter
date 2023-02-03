@@ -83,9 +83,11 @@ const Sidebar = () => {
 				icon={close}
 				position="top-right"
 			/>
-			{questionAnswers.map((qa) => {
-				return <ResponseBlock qa={qa} key={qa.q} />;
-			})}
+			<div id="scroll-wrapper">
+				{questionAnswers.map((qa) => {
+					return <ResponseBlock qa={qa} key={qa.q} />;
+				})}
+			</div>
 			<div ref={bottomRef} />
 		</div>
 	);
