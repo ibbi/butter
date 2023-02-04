@@ -66,7 +66,7 @@ const Sidebar = () => {
 			},
 		]);
 		completion(q, complexity).then((r) => {
-			updateLoading(r.status === 200, r.data.choices[0].text);
+			updateLoading(r.status === 200, r.body);
 		});
 	};
 
