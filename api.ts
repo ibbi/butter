@@ -1,6 +1,6 @@
 export default async (question, complexity) => {
 	const res = await fetch(
-		"https://s9w6fti4ma.execute-api.us-east-1.amazonaws.com/default/dig",
+		"https://2rr8gjehj5.execute-api.us-east-1.amazonaws.com/default/dig",
 		{
 			method: "POST",
 			body: JSON.stringify({ question, complexity }),
