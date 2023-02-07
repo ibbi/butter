@@ -5,7 +5,7 @@ export default async (question, complexity) => {
 			method: "POST",
 			body: JSON.stringify({ question, complexity }),
 			headers: {
-				"Content-Type": "application/json",
+				"Content-Type": "text/plain",
 			},
 		},
 	);

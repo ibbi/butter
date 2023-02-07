@@ -65,8 +65,9 @@ const Sidebar = () => {
 				a: "Loading...",
 			},
 		]);
-		completion(q, complexity).then((r) => {
-			updateLoading(r.status === 200, r.body);
+		completion(q, complexity).then(async (r) => {
+			const content = await r.text();
+			updateLoading(r.status === 200, content);
 		});
 	};
 
