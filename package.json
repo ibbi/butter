@@ -1,8 +1,8 @@
 {
 	"name": "rabbithole",
 	"displayName": "Rabbithole",
-	"version": "0.0.1",
-	"description": "GPT3 powered rabbithole dodger",
+	"version": "1.0.0",
+	"description": "AI powered concept explainer and elaborator.",
 	"author": "ibbi",
 	"scripts": {
 		"dev": "plasmo dev",
